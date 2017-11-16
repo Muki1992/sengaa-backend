@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>SengaaBackend</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>SengaaBackend</title>
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  <body>
-    <%= yield %>
-  </body>
+</head>
+
+<body>
+
+<small>Eingeloggt als <%= @boUser.nickname %></small>
+
+<ul>
+  <li><a href="home">Home</a></li>
+  <li><a href="challenges">Challenges</a></li>
+  <li><a href="partners">Partners&Prizes</a></li>
+  <li><a href="categories">Categories</a></li>
+
+  <li style="float:right"><a class="active" href="/logout">Logout</a></li>
+
+</ul>
+
+<%= yield %>
+</body>
 </html>

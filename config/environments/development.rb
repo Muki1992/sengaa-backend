@@ -6,6 +6,7 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+
   # Do not eager load code on boot.
   config.eager_load = false
 
@@ -18,7 +19,7 @@ Rails.application.configure do
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.seconds.to_i}"
+        'Cache-Control' => "public, max-age=#{2.days.seconds.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -52,10 +53,24 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  OmniAuth.config.on_failure = Proc.new { |env|
+  OmniAuth.config.on_failure = Proc.new {|env|
     message_key = env['omniauth.error.type']
     error_description = Rack::Utils.escape(env['omniauth.error'].error_reason)
     new_path = "#{env['SCRIPT_NAME']}#{OmniAuth.config.path_prefix}/failure?message=#{message_key}&error_description=#{error_description}"
     Rack::Response.new(['302 Moved'], 302, 'Location' => new_path).finish
   }
+
+  config.paperclip_defaults = {
+      storage: :s3,
+      bucket: "new-sengaa",
+      s3_credentials: {
+          access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+          secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+          s3_region: "eu-west-1",
+      },
+      path: "/:class/:id/:style/:filename",
+      url: "s3_domain_url",
+      s3_host_name: "s3-eu-west-1.amazonaws.com"
+  }
+
 end

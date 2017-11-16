@@ -1,0 +1,85 @@
+h1 Challenges
+
+div.card
+  p Add Challenge
+  = form_for :challenge, url: bo_challenges_path do |f|
+    div.field
+      = f.label :title
+      br
+      = f.text_field :title
+    div.field
+      = f.label :description
+      br
+      = f.text_field :description
+    div.field
+      = f.label :category
+      br
+      = f.collection_select(:category_id, Category.all, :id, :name, include_blank: "Select Challenge Category")
+    div.field
+      = f.label :start
+      br
+      = f.date_select :start
+      = f.time_select :start, :ignore_date => true
+    div.field
+      = f.label :end
+      br
+      = f.date_select :start
+      = f.time_select :start, :ignore_date => true
+    div.field
+      = f.label :gender
+      br
+        = f.select :gender, Challenge.genders.keys
+    div.field
+    = f.submit
+
+br
+
+div class = "card"
+  div style="overflow-x:auto;"
+  - if @challenges.present?
+    = will_paginate @challenges, :param_name => 'challenges_page'
+    table
+      thead
+        tr
+          th Id
+          th Title
+          th Description
+          th Partner
+          th Category
+          th Start
+          th End
+          th Gender
+          th Prizes
+      tbody
+        - @challenges.each do |challenge|
+          tr
+            td
+              = challenge.id
+            td
+              = challenge.title
+            td
+              = challenge.description
+            td
+            /img src =challenge.challenge_prize.partner.image.url(:thumb)
+            td
+              = challenge.category.name
+            td
+              = challenge.start
+            td
+              = challenge.end
+            td
+              = challenge.gender
+            td
+              - challenge.prizes.each do |p|
+                div  #{p.position} #{p.prize_content.title}
+            td
+              = form_for :prize, url: bo_prizes_path do |f|
+                div.field
+                  = f.hidden_field :challenge_id, :value => challenge.id
+                  = f.collection_select(:prize_content_id, PrizeContent.all, :id, :title, include_blank: "Select PrizeContent")
+                div.field
+                  = f.number_field :position, :class => 'text_field', :step => 1
+                div.field
+                  = f.submit
+  - else
+    p No challenge in the database

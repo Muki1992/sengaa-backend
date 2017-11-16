@@ -1,3 +1,15 @@
+GIT
+  remote: https://github.com/thoughtbot/paperclip.git
+  revision: c38bb3168a9530514d866fc674c335e05e543a5e
+  ref: c38bb31
+  specs:
+    paperclip (4.3.1)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      cocaine (~> 0.5.5)
+      mime-types
+      mimemagic (~> 0.3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -41,6 +53,14 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
+    aws-sdk (2.10.82)
+      aws-sdk-resources (= 2.10.82)
+    aws-sdk-core (2.10.82)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.10.82)
+      aws-sdk-core (= 2.10.82)
+    aws-sigv4 (1.0.2)
     bindex (0.5.0)
     builder (3.2.3)
     byebug (9.1.0)
@@ -53,6 +73,9 @@ GEM
       xpath (~> 2.0)
     childprocess (0.8.0)
       ffi (~> 1.0, >= 1.0.11)
+    climate_control (0.2.0)
+    cocaine (0.5.8)
+      climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -75,6 +98,7 @@ GEM
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
+    jmespath (1.3.1)
     jwt (1.5.6)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -86,6 +110,10 @@ GEM
     mail (2.7.0)
       mini_mime (>= 0.1.1)
     method_source (0.9.0)
+    mime-types (3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2016.0521)
+    mimemagic (0.3.2)
     mini_mime (0.1.4)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
@@ -158,6 +186,13 @@ GEM
     selenium-webdriver (3.7.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
+    slim (3.0.8)
+      temple (>= 0.7.6, < 0.9)
+      tilt (>= 1.3.3, < 2.1)
+    slim-rails (3.1.3)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      slim (~> 3.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -170,6 +205,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    temple (0.8.0)
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
@@ -188,6 +224,7 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    will_paginate (3.1.6)
     xpath (2.1.0)
       nokogiri (~> 1.3)
 
@@ -195,6 +232,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk (~> 2.3)
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
@@ -203,17 +241,21 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   omniauth (~> 1.6.1)
   omniauth-auth0 (~> 2.0.0)
+  paperclip!
   pg (~> 0.18)
   puma (~> 3.7)
   rails (~> 5.1.4)
   sass-rails (~> 5.0)
   selenium-webdriver
+  slim
+  slim-rails
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+  will_paginate
 
 BUNDLED WITH
-   1.15.3
+   1.16.0

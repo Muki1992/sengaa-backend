@@ -1,0 +1,29 @@
+h1 Categories
+div.card {style = "vertical-align:top"}
+  p Add Category
+  = form_for :category, url: categories_path do |f|
+    div.field
+      = f.label :name
+      br
+      = f.text_field :name
+    div.field
+      = f.submit
+
+div class = "card"
+  div style="overflow-x:auto;"
+  - if @categories.present?
+    = will_paginate @categories, :param_name => 'categories_page'
+    table
+      thead
+        tr
+          th Id
+          th Category Name
+      tbody
+        - @categories.each do |category|
+          tr
+            td = category.id
+            td = category.name
+            /td
+              /  = link_to "Delete", {:controller => "categories", :action => 'destroy', :id => category.id}, :method => :delete, class: "btn btn-default", data: { confirm: 'Are you sure you want to reset the indexes?' }
+  - else
+    p No category in the database

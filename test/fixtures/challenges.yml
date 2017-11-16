@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyString
+  gender: 1
+  category: one
+  start: 2017-11-14
+  end: 2017-11-14
+
+two:
+  title: MyString
+  description: MyString
+  gender: 1
+  category: two
+  start: 2017-11-14
+  end: 2017-11-14

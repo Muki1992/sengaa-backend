@@ -30,7 +30,14 @@ gem 'omniauth', '~> 1.6.1'
 gem 'omniauth-auth0', '~> 2.0.0'
 # Access Token
 gem 'jwt'
-
+# Output
+gem 'slim'
+gem 'slim-rails'
+# Image uploading
+gem 'paperclip', github: 'thoughtbot/paperclip', ref: 'c38bb31'
+gem 'aws-sdk', '~> 2.3'
+# Pagination
+gem 'will_paginate'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

@@ -1,0 +1,98 @@
+h1 Partners & Prize Contents
+
+div.card {style = "vertical-align:top"}
+  p Add a partner
+  = form_for :partner, url: partners_path do |f|
+    div.field
+      = f.label :name
+      br
+      = f.text_field :name
+    div.field
+      = f.label :url
+      br
+      = f.text_field :url
+    div.field
+      = f.label 'Choose an image'
+      br
+      = f.file_field :image
+    div.field
+      = f.submit
+
+div class = "card"
+  p Add PrizeContent
+  = form_for :prize, url: prize_contents_path do |f|
+    div.field
+      = f.label 'Type'
+      br
+      = f.collection_select(:partner_id, Partner.all, :id, :name, include_blank: "Select Partner")
+    div.field
+      = f.label :title
+      br
+      = f.text_field :title
+    div.field
+      = f.label :description
+      br
+      = f.text_field :description
+    div.field
+      = f.label :code
+      br
+      = f.text_field :code
+    div.field
+      = f.submit
+
+br
+
+div.card
+  div style="overflow-x:auto;"
+  - if @partners.present?
+    = will_paginate @partners, :param_name => 'partners_page'
+    table
+      thead
+        tr
+          th Id
+          th Name
+          th Image
+      tbody
+        - @partners.each do |partner|
+          tr
+            td
+              = partner.id
+            td
+              = partner.name
+            td
+              img src =partner.image.url(:thumb)
+            td
+              = link_to "Delete", {:controller => "partners", :action => 'destroy', :id => partner.id}, :method => :delete, class: "btn btn-default", data: {confirm: 'Are you sure?'}
+  - else
+    p No partner in the database
+br
+
+div.card
+  div style="overflow-x:auto;"
+  - if @prizeContents.present?
+    = will_paginate @prizeContents, :param_name => 'prize_content_page'
+    table
+      thead
+        tr
+          th Id
+          th Title
+          th Partner
+          th Description
+          th Code
+      tbody
+        - @prizeContents.each do |prizeContent|
+          tr
+            td
+              = prizeContent.id
+            td
+              = prizeContent.title
+            td
+              = prizeContent.partner.name
+            td
+              = prizeContent.description
+            td
+              = prizeContent.code
+            td
+              = link_to "Delete", {:controller => "prize_contents", :action => 'destroy', :id => prizeContent.id}, :method => :delete, class: "btn btn-default", data: {confirm: 'Are you sure?'}
+  - else
+    p No prize in the database

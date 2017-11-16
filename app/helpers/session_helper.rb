@@ -5,4 +5,5 @@ module SessionHelper
 
     state
   end
+
 end
