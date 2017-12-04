@@ -10,7 +10,7 @@ module ApiSecured
   def authenticate_request!
     auth_token
   rescue JWT::VerificationError, JWT::DecodeError
-    render json: { errors: ['Not Authenticated'] }, status: :unauthorized
+    render json: {errors: ['Not Authenticated']}, status: :unauthorized
   end
 
   def http_token

@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171116101354) do
+ActiveRecord::Schema.define(version: 20171204103314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "awards", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.date "valid_until"
+    t.string "code"
+    t.bigint "partner_id"
+    t.bigint "challenge_id"
+    t.integer "level"
+    t.date "user_notified_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_awards_on_challenge_id"
+    t.index ["partner_id"], name: "index_awards_on_partner_id"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -28,6 +43,7 @@ ActiveRecord::Schema.define(version: 20171116101354) do
     t.bigint "category_id"
     t.datetime "start"
     t.datetime "end"
+    t.integer "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_challenges_on_category_id"
@@ -38,6 +54,21 @@ ActiveRecord::Schema.define(version: 20171116101354) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "participation_rewards", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.date "valid_until"
+    t.string "code"
+    t.bigint "partner_id"
+    t.bigint "challenge_id"
+    t.integer "amount"
+    t.integer "distributed_amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_participation_rewards_on_challenge_id"
+    t.index ["partner_id"], name: "index_participation_rewards_on_partner_id"
   end
 
   create_table "partners", force: :cascade do |t|
@@ -51,28 +82,9 @@ ActiveRecord::Schema.define(version: 20171116101354) do
     t.datetime "image_updated_at"
   end
 
-  create_table "prize_contents", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
-    t.string "code"
-    t.bigint "partner_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["partner_id"], name: "index_prize_contents_on_partner_id"
-  end
-
-  create_table "prizes", force: :cascade do |t|
-    t.integer "position"
-    t.bigint "prize_content_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "challenge_id"
-    t.index ["challenge_id"], name: "index_prizes_on_challenge_id"
-    t.index ["prize_content_id"], name: "index_prizes_on_prize_content_id"
-  end
-
+  add_foreign_key "awards", "challenges"
+  add_foreign_key "awards", "partners"
   add_foreign_key "challenges", "categories"
-  add_foreign_key "prize_contents", "partners"
-  add_foreign_key "prizes", "challenges"
-  add_foreign_key "prizes", "prize_contents"
+  add_foreign_key "participation_rewards", "challenges"
+  add_foreign_key "participation_rewards", "partners"
 end

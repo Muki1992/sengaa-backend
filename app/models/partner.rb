@@ -4,7 +4,7 @@ class Partner < ApplicationRecord
       square: '200x200#',
       medium: '300x300>'
   }
-  has_many :prize_contents
+  has_many :awards
 
 
   # Validate the attached image is image/jpg, image/png, etc

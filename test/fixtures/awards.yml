@@ -3,13 +3,21 @@
 one:
   title: MyString
   description: MyString
-  type: 
+  valid_until: 2017-11-27
   code: MyString
   partner: one
+  challenge: one
+  level_type: 1
+  level: 1
+  user_notified_at: 2017-11-27
 
 two:
   title: MyString
   description: MyString
-  type: 
+  valid_until: 2017-11-27
   code: MyString
   partner: two
+  challenge: two
+  level_type: 1
+  level: 1
+  user_notified_at: 2017-11-27

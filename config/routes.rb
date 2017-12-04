@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  get 'home/index'
+
   get "/pages/:page" => "pages#show"
   get "/logout" => "pages#logout"
 
@@ -17,10 +19,12 @@ Rails.application.routes.draw do
   resources :bo_challenges
   resources :bo_prizes
 
-  Rails.application.routes.draw do
-    namespace :api, :defaults => {:format => :json} do
+  namespace :backoffice do
+    resources :partners
+  end
 
-    end
+  namespace :api, defaults: {format: :json} do
+    resources 'challenges'
   end
 
 end

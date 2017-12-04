@@ -23,8 +23,9 @@ div.card
     div.field
       = f.label :end
       br
-      = f.date_select :start
-      = f.time_select :start, :ignore_date => true
+      = f.date_select :end
+      = f.time_select :end, :ignore_date => true
+
     div.field
       = f.label :gender
       br
@@ -44,7 +45,7 @@ div class = "card"
           th Id
           th Title
           th Description
-          th Partner
+          th State
           th Category
           th Start
           th End
@@ -60,6 +61,7 @@ div class = "card"
             td
               = challenge.description
             td
+              = challenge.state
             /img src =challenge.challenge_prize.partner.image.url(:thumb)
             td
               = challenge.category.name
@@ -78,7 +80,7 @@ div class = "card"
                   = f.hidden_field :challenge_id, :value => challenge.id
                   = f.collection_select(:prize_content_id, PrizeContent.all, :id, :title, include_blank: "Select PrizeContent")
                 div.field
-                  = f.number_field :position, :class => 'text_field', :step => 1
+                  = f.number_field :position, :class => 'text_field', :step => 1, :min => 0
                 div.field
                   = f.submit
   - else
