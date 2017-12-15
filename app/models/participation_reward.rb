@@ -1,4 +1,4 @@
 class ParticipationReward < ApplicationRecord
   belongs_to :partner
-  belongs_to :challenge
+  has_one :challenge
 end

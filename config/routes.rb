@@ -24,7 +24,12 @@ Rails.application.routes.draw do
   end
 
   namespace :api, defaults: {format: :json} do
-    resources 'challenges'
+    resources :challenges
+    resources :users
+    resources :styles
+    resources :followings
+    resources :wows
+
   end
 
 end

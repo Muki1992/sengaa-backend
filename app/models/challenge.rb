@@ -3,6 +3,8 @@ class Challenge < ApplicationRecord
 
   belongs_to :category
   has_many :awards
+  belongs_to :participation_reward
+
   enum gender: %i[every female male]
   enum state: %i[created active finished]
 

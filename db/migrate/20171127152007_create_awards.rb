@@ -9,7 +9,6 @@ class CreateAwards < ActiveRecord::Migration[5.1]
       t.references :challenge, foreign_key: true
       t.integer :level
       t.date :user_notified_at
-
       t.timestamps
     end
   end
