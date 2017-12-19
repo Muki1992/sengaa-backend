@@ -1,4 +1,4 @@
-class BoEventsController < ApplicationController
+class Backoffice::BoEventsController < ApplicationController
   include Secured
 
   def index

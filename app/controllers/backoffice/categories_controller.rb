@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class Backoffice::CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)

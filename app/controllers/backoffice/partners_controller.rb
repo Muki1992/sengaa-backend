@@ -1,4 +1,4 @@
-class PartnersController < ApplicationController
+class Backoffice::PartnersController < ApplicationController
 
   def index
     load_partners

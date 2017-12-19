@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     resources :styles
     resources :followings
     resources :wows
+    resources :comments
+    resources :rankings
 
   end
 

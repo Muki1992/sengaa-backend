@@ -1,12 +1,19 @@
 class Challenge < ApplicationRecord
+  include Filterable
   before_save :set_state, unless: :state
 
   belongs_to :category
   has_many :awards
+  has_many :styles
   belongs_to :participation_reward
 
   enum gender: %i[every female male]
   enum state: %i[created active finished]
+
+  scope :challenge_id, -> (id) {where id: id}
+  scope :category_id, ->(category_id) {where category_id: category_id}
+  scope :gender, ->(gender) {where gender: gender}
+  scope :state, ->(state) {where state: state}
 
   def set_state
     puts title + ', Old State: ' + state if state

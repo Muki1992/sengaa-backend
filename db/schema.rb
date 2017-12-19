@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171215103917) do
+ActiveRecord::Schema.define(version: 20171218182727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,8 +26,10 @@ ActiveRecord::Schema.define(version: 20171215103917) do
     t.date "user_notified_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "style_id"
     t.index ["challenge_id"], name: "index_awards_on_challenge_id"
     t.index ["partner_id"], name: "index_awards_on_partner_id"
+    t.index ["style_id"], name: "index_awards_on_style_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -102,8 +104,12 @@ ActiveRecord::Schema.define(version: 20171215103917) do
   create_table "styles", force: :cascade do |t|
     t.string "title"
     t.bigint "user_id"
+    t.bigint "challenge_id"
+    t.integer "count_of_comments", default: 0
+    t.integer "count_of_wows", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_styles_on_challenge_id"
     t.index ["user_id"], name: "index_styles_on_user_id"
   end
 
@@ -126,6 +132,7 @@ ActiveRecord::Schema.define(version: 20171215103917) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.integer "score", default: 0
+    t.string "auth_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -139,11 +146,13 @@ ActiveRecord::Schema.define(version: 20171215103917) do
 
   add_foreign_key "awards", "challenges"
   add_foreign_key "awards", "partners"
+  add_foreign_key "awards", "styles"
   add_foreign_key "challenges", "categories"
   add_foreign_key "challenges", "participation_rewards"
   add_foreign_key "comments", "styles"
   add_foreign_key "comments", "users"
   add_foreign_key "participation_rewards", "partners"
+  add_foreign_key "styles", "challenges"
   add_foreign_key "styles", "users"
   add_foreign_key "user_actions", "comments"
   add_foreign_key "user_actions", "followings"

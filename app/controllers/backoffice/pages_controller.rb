@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class Backoffice::PagesController < ApplicationController
   include Secured
   skip_before_action :current_bo_user, :logged_in_using_omniauth?, :only => [:logout]
 

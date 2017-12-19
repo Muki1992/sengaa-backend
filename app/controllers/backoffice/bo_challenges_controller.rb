@@ -1,4 +1,4 @@
-class BoChallengesController < ApplicationController
+class Backoffice::BoChallengesController < ApplicationController
 
   def create
     @challenge = Challenge.new(challenge_params)

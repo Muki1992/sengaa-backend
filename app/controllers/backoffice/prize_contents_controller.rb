@@ -1,4 +1,4 @@
-class PrizeContentsController < ApplicationController
+class Backoffice::PrizeContentsController < ApplicationController
 
   def create
     @prize = PrizeContent.new(prizes_params)
