@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171218182727) do
+ActiveRecord::Schema.define(version: 20171221121343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,16 @@ ActiveRecord::Schema.define(version: 20171218182727) do
     t.datetime "updated_at", null: false
     t.index ["style_id"], name: "index_comments_on_style_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "deals", force: :cascade do |t|
+    t.bigint "partner_id"
+    t.string "link"
+    t.string "code"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["partner_id"], name: "index_deals_on_partner_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -151,6 +161,7 @@ ActiveRecord::Schema.define(version: 20171218182727) do
   add_foreign_key "challenges", "participation_rewards"
   add_foreign_key "comments", "styles"
   add_foreign_key "comments", "users"
+  add_foreign_key "deals", "partners"
   add_foreign_key "participation_rewards", "partners"
   add_foreign_key "styles", "challenges"
   add_foreign_key "styles", "users"

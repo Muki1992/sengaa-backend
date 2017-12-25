@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  partner: one
+  link: MyString
+  code: MyString
+  description: MyString
+
+two:
+  partner: two
+  link: MyString
+  code: MyString
+  description: MyString

@@ -14,6 +14,8 @@ sengaa_challenge2 = Challenge.create(title: 'sengaa Challenge2', gender: 1, star
 sengaa_challenge3 = Challenge.create(title: 'sengaa Challenge3', gender: 2, start: DateTime.new(2009, 9, 14, 8), end: DateTime.new(2009, 9, 15, 8), description: 'This is the ultimate challenge for all fashionistas', category_id: sengaa_category.id, participation_reward_id: sengaa_participation_reward.id)
 
 
+deal1 = Deal.create(partner: sengaa_partner, link: 'www.sengaa.de', code: '7439027423', description: 'Use this code to buy awesome stuff')
+
 user_a = User.create(username: 'Muki')
 user_b = User.create(username: 'Khan')
 user_c = User.create(username: 'Max')

@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     resources :wows
     resources :comments
     resources :rankings
-
+    resources :deals
   end
 
 end
