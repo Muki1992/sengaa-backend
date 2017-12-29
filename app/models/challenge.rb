@@ -16,9 +16,9 @@ class Challenge < ApplicationRecord
   scope :state, ->(state) {where state: state}
 
   def set_state
-    puts title + ', Old State: ' + state if state
-    self.state = check_state
-    puts title + ', New State: ' + state
+    new_state = check_state
+    puts title + ', Old State: ' + state + ', New State: ' + Challenge.states.key(new_state) if state
+    self.state = new_state
   end
 
   def check_state
