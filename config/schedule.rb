@@ -1,7 +1,7 @@
 set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log"}
-set :environment, "development"
+set :environment, "production"
 
-every 30.minutes do
+every 1.minutes do
   puts "Running update_states task"
   rake "challenges:update_states"
 end
