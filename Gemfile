@@ -40,7 +40,7 @@ gem 'aws-sdk', '~> 2.3'
 gem 'will_paginate'
 
 gem 'rails_db'
-gem 'whenever', :require => false
+#whenever -cgem 'whenever', :require => false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
