@@ -12,26 +12,29 @@ Rails.application.routes.draw do
   get "/auth/failure" => "auth0#failure"
 
   # BoController
-  resources :bo_events
-  resources :categories
-  resources :partners
-  resources :prize_contents
-  resources :bo_challenges
-  resources :bo_prizes
+  resources :bo_events,
+            :categories,
+            :partners,
+            :prize_contents,
+            :bo_challenges,
+            :bo_prizes
 
   namespace :backoffice do
     resources :partners
   end
 
   namespace :api, defaults: {format: :json} do
-    resources :challenges
-    resources :users
-    resources :styles
-    resources :followings
-    resources :wows
-    resources :comments
-    resources :rankings
-    resources :deals
+    resources :challenges,
+              :users,
+              :styles,
+              :followings,
+              :wows,
+              :comments,
+              :rankings,
+              :deals,
+              :teams,
+              :memberships,
+              :team_requests
   end
 
 end

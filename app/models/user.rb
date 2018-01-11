@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :style
   has_many :comment
   has_many :user_actions
+  has_many :membership
+  has_many :team
 
   has_many :given_wows,
            foreign_key: 'user_id', class_name: 'Wow'
@@ -16,6 +18,8 @@ class User < ApplicationRecord
   has_many :followers, through: :followers_info, source: :followed_user
 
   has_many :challenge, through: :style
+
+  has_many :award, through: :style
 
   scope :username, -> (username) {where 'lower(username) LIKE lower(?) ', "%#{username}%"}
 

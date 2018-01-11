@@ -6,8 +6,9 @@ class Api::UsersController < BaseApiController
 
   def show
     @user = User.find(params[:id])
-    render json: @user, include: { followings: {},
-                                   followers: {} },
+    render json: @user, include: {followings: {},
+                                  followers: {},
+                                  awards: {}},
            except: %i[created_at updated_at]
   end
 end

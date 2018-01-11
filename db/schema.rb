@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221121343) do
+ActiveRecord::Schema.define(version: 20180104153831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,16 @@ ActiveRecord::Schema.define(version: 20171221121343) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "team_id"
+    t.string "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_memberships_on_team_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
   create_table "participation_rewards", force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -123,6 +133,27 @@ ActiveRecord::Schema.define(version: 20171221121343) do
     t.index ["user_id"], name: "index_styles_on_user_id"
   end
 
+  create_table "team_requests", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "team_id"
+    t.string "status", default: "sent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_team_requests_on_team_id"
+    t.index ["user_id"], name: "index_team_requests_on_user_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "homepage"
+    t.boolean "public"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_teams_on_user_id"
+  end
+
   create_table "user_actions", force: :cascade do |t|
     t.string "action_type"
     t.bigint "user_id"
@@ -143,6 +174,12 @@ ActiveRecord::Schema.define(version: 20171221121343) do
     t.string "username"
     t.integer "score", default: 0
     t.string "auth_id"
+    t.string "picture"
+    t.string "background"
+    t.integer "gender"
+    t.string "fist_name"
+    t.string "family_name"
+    t.date "birthdate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -162,9 +199,14 @@ ActiveRecord::Schema.define(version: 20171221121343) do
   add_foreign_key "comments", "styles"
   add_foreign_key "comments", "users"
   add_foreign_key "deals", "partners"
+  add_foreign_key "memberships", "teams"
+  add_foreign_key "memberships", "users"
   add_foreign_key "participation_rewards", "partners"
   add_foreign_key "styles", "challenges"
   add_foreign_key "styles", "users"
+  add_foreign_key "team_requests", "teams"
+  add_foreign_key "team_requests", "users"
+  add_foreign_key "teams", "users"
   add_foreign_key "user_actions", "comments"
   add_foreign_key "user_actions", "followings"
   add_foreign_key "user_actions", "styles"

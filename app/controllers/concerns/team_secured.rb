@@ -1,8 +1,8 @@
-module ApiSecured
+module TeamSecured
   extend ActiveSupport::Concern
 
   included do
-    before_action :authenticate_request!
+    before_action :authenticate_user_role!
   end
 
   private

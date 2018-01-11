@@ -16,7 +16,7 @@ sengaa_challenge3 = Challenge.create(title: 'sengaa Challenge3', gender: 2, star
 
 deal1 = Deal.create(partner: sengaa_partner, link: 'www.sengaa.de', code: '7439027423', description: 'Use this code to buy awesome stuff')
 
-user_a = User.create(username: 'Muki')
+user_a = User.create(username: 'Muki', auth_id: 'google-oauth2|111020572980551184985')
 user_b = User.create(username: 'Khan')
 user_c = User.create(username: 'Max')
 
@@ -41,3 +41,21 @@ wow11 = Wow.create(user_id: user_b.id, style_id: style_3.id)
 comment_1 = Comment.create(style_id: style_1.id, user_id: user_b.id, content: 'Looks great :-)')
 
 award_1 = Award.create(title: 'Award', description: 'Awesome Award', code: '447889320', level: 1, style_id: style_1.id)
+
+
+team = Team.create(name: 'Team1', description: 'Awesome Team', public: false, user_id: user_a.id)
+team2 = Team.create(name: 'Team2', description: 'Awesome Team', public: false, user_id: user_b.id)
+team3 = Team.create(name: 'Team3', description: 'Awesome Team', public: false, user_id: user_c.id)
+
+#membership1 = Membership.create(team_id: team.id, user_id: user_a.id)
+#membership2 = Membership.create(team_id: team2.id, user_id: user_b.id)
+#membership3 = Membership.create(team_id: team3.id, user_id: user_c.id)
+
+request1 = TeamRequest.create(user_id: user_a.id, team_id: team2.id)
+request2 = TeamRequest.create(user_id: user_a.id, team_id: team3.id)
+
+request3 = TeamRequest.create(user_id: user_b.id, team_id: team.id)
+request4 = TeamRequest.create(user_id: user_b.id, team_id: team3.id)
+
+request5 = TeamRequest.create(user_id: user_c.id, team_id: team.id)
+request6 = TeamRequest.create(user_id: user_c.id, team_id: team2.id)

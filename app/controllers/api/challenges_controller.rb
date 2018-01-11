@@ -2,7 +2,7 @@ class Api::ChallengesController < BaseApiController
 
   def index
     @challenges = Challenge.paginate(page: params[:page], per_page: 10)
-    UserManagementTokenService.new
+    #UserManagementTokenService.new
     render json: @challenges
   end
 
