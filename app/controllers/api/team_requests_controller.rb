@@ -1,5 +1,6 @@
 class Api::TeamRequestsController < BaseApiController
-  before_action :check_team_id_header, only: [:index]
+  include TeamSecured
+  before_action :check_team_id_header, except: [:create, :update]
 
   def index
     @team_requests = TeamRequest.where(team_id: request.headers['team-id'], status: 'sent')
@@ -26,18 +27,4 @@ class Api::TeamRequestsController < BaseApiController
     params.require(:team_request).permit(:team_id)
   end
 
-  def check_team_id_header
-    if request.headers['team-id'].present?
-      check_authorization_of_current_user(request.headers['team-id'])
-    else
-      render json: {errors: ['Team id missing']}, status: 400
-    end
-  end
-
-  private def check_authorization_of_current_user(team_id)
-    membership = Membership.find_by_user_id_and_team_id(@current_user.id, team_id)
-    unless membership.present? && (membership.role == 'Owner' || membership.role == 'Admin')
-      render json: {errors: ['No admin rights']}, status: 400
-    end
-  end
 end

@@ -14,7 +14,7 @@ class TeamRequest < ApplicationRecord
   end
 
   def create_membership
-    Membership.new(user_id: user.id, team_id: team.id, role: 'Member').save if status == 'accepted'
+    Membership.new(user_id: user.id, team_id: team.id, role: 'member').save if status == 'accepted'
   end
 
   scope :team_id, -> (team_id) {where team_id: team_id}

@@ -24,8 +24,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api, defaults: {format: :json} do
-    resources :challenges,
-              :users,
+    resources :users,
               :styles,
               :followings,
               :wows,
@@ -35,6 +34,14 @@ Rails.application.routes.draw do
               :teams,
               :memberships,
               :team_requests
+    namespace :challenges do
+      resources :single_challenges, path: 'singles'
+      resources :team_challenges, path: 'teams'
+    end
+
+    resources :challenges do
+      resources :styles
+    end
   end
 
 end

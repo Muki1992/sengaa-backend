@@ -1,26 +1,18 @@
 module TeamSecured
   extend ActiveSupport::Concern
 
-  included do
-    before_action :authenticate_user_role!
-  end
-
-  private
-
-  def authenticate_request!
-    result = auth_token
-    @current_user = User.find_by_auth_id(result[0]['sub'])
-  rescue JWT::VerificationError, JWT::DecodeError
-    render json: {errors: ['Not Authenticated']}, status: :unauthorized
-  end
-
-  def http_token
-    if request.headers['Authorization'].present?
-      request.headers['Authorization'].split(' ').last
+  def check_team_id_header
+    if request.headers['team-id'].present?
+      check_authorization_of_current_user(request.headers['team-id'])
+    else
+      render json: {errors: ['Team id missing']}, status: 400
     end
   end
 
-  def auth_token
-    JsonWebToken.verify(http_token)
+  def check_authorization_of_current_user(team_id)
+    membership = Membership.find_by_user_id_and_team_id(@current_user.id, team_id)
+    unless membership.present? && (membership.role == 'owner' || membership.role == 'admin')
+      render json: {errors: ['No admin rights']}, status: 400
+    end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180104153831) do
+ActiveRecord::Schema.define(version: 20180113215556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,14 +41,15 @@ ActiveRecord::Schema.define(version: 20180104153831) do
   create_table "challenges", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.integer "gender"
+    t.string "gender"
     t.bigint "category_id"
     t.datetime "start"
     t.datetime "end"
-    t.integer "state"
+    t.string "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "participation_reward_id"
+    t.string "type"
     t.index ["category_id"], name: "index_challenges_on_category_id"
     t.index ["participation_reward_id"], name: "index_challenges_on_participation_reward_id"
   end
@@ -133,6 +134,18 @@ ActiveRecord::Schema.define(version: 20180104153831) do
     t.index ["user_id"], name: "index_styles_on_user_id"
   end
 
+  create_table "team_challenge_stages", force: :cascade do |t|
+    t.bigint "challenge_id"
+    t.datetime "end"
+    t.string "state"
+    t.integer "bonus"
+    t.string "image"
+    t.integer "winning_team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_team_challenge_stages_on_challenge_id"
+  end
+
   create_table "team_requests", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "team_id"
@@ -204,6 +217,7 @@ ActiveRecord::Schema.define(version: 20180104153831) do
   add_foreign_key "participation_rewards", "partners"
   add_foreign_key "styles", "challenges"
   add_foreign_key "styles", "users"
+  add_foreign_key "team_challenge_stages", "challenges"
   add_foreign_key "team_requests", "teams"
   add_foreign_key "team_requests", "users"
   add_foreign_key "teams", "users"

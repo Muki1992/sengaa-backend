@@ -9,10 +9,13 @@
 sengaa_partner = Partner.create(name: 'sengaa', url: 'challenge')
 sengaa_category = Category.create(name: 'Sommer Look')
 sengaa_participation_reward = ParticipationReward.create(title: 'Participation Reward', description: 'Upload a picture and get a free code', partner_id: sengaa_partner.id, code: 'df', amount: 10, distributed_amount: 0)
-sengaa_challenge = Challenge.create(title: 'sengaa Challenge', gender: 0, start: DateTime.new(2009, 9, 14, 8), end: DateTime.new(2009, 9, 15, 8), description: 'This is the ultimate challenge for all fashionistas', category_id: sengaa_category.id, participation_reward_id: sengaa_participation_reward.id)
-sengaa_challenge2 = Challenge.create(title: 'sengaa Challenge2', gender: 1, start: DateTime.new(2009, 9, 14, 8), end: DateTime.new(2009, 9, 15, 8), description: 'This is the ultimate challenge for all fashionistas', category_id: sengaa_category.id, participation_reward_id: sengaa_participation_reward.id)
-sengaa_challenge3 = Challenge.create(title: 'sengaa Challenge3', gender: 2, start: DateTime.new(2009, 9, 14, 8), end: DateTime.new(2009, 9, 15, 8), description: 'This is the ultimate challenge for all fashionistas', category_id: sengaa_category.id, participation_reward_id: sengaa_participation_reward.id)
+sengaa_challenge = SingleChallenge.create(title: 'sengaa Challenge', gender: 'every', start: DateTime.new(2009, 9, 14, 8), end: DateTime.new(2009, 9, 15, 8), description: 'This is the ultimate challenge for all fashionistas', category_id: sengaa_category.id, participation_reward_id: sengaa_participation_reward.id)
+sengaa_challenge2 = SingleChallenge.create(title: 'sengaa Challenge2', gender: 'male', start: DateTime.new(2009, 9, 14, 8), end: DateTime.new(2009, 9, 15, 8), description: 'This is the ultimate challenge for all fashionistas', category_id: sengaa_category.id, participation_reward_id: sengaa_participation_reward.id)
+sengaa_challenge3 = SingleChallenge.create(title: 'sengaa Challenge3', gender: 'female', start: DateTime.new(2009, 9, 14, 8), end: DateTime.new(2009, 9, 15, 8), description: 'This is the ultimate challenge for all fashionistas', category_id: sengaa_category.id, participation_reward_id: sengaa_participation_reward.id)
 
+sengaa_challenge4 = TeamChallenge.create(title: 'sengaa Challenge3', gender: 'female', start: DateTime.new(2009, 9, 14, 8), end: DateTime.new(2009, 9, 15, 8), description: 'This is the ultimate challenge for all fashionistas', category_id: sengaa_category.id, participation_reward_id: sengaa_participation_reward.id)
+
+sengaa_team_challenge_stage1 = TeamChallengeStage.create(challenge_id: sengaa_challenge4.id, end: DateTime.new(2009, 9, 15, 8), bonus: 500)
 
 deal1 = Deal.create(partner: sengaa_partner, link: 'www.sengaa.de', code: '7439027423', description: 'Use this code to buy awesome stuff')
 
@@ -43,7 +46,7 @@ comment_1 = Comment.create(style_id: style_1.id, user_id: user_b.id, content: 'L
 award_1 = Award.create(title: 'Award', description: 'Awesome Award', code: '447889320', level: 1, style_id: style_1.id)
 
 
-team = Team.create(name: 'Team1', description: 'Awesome Team', public: false, user_id: user_a.id)
+team = Team.create(name: 'Team1', description: 'Awesome Team', public: true, user_id: user_a.id)
 team2 = Team.create(name: 'Team2', description: 'Awesome Team', public: false, user_id: user_b.id)
 team3 = Team.create(name: 'Team3', description: 'Awesome Team', public: false, user_id: user_c.id)
 
