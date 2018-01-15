@@ -1,4 +1,4 @@
-module Secured
+module Concerns::Secured
   extend ActiveSupport::Concern
 
   included do

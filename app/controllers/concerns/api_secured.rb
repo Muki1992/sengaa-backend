@@ -1,4 +1,4 @@
-module ApiSecured
+module Concerns::ApiSecured
   extend ActiveSupport::Concern
 
   included do

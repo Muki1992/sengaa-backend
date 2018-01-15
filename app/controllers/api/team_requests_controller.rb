@@ -1,9 +1,9 @@
 class Api::TeamRequestsController < BaseApiController
-  include TeamSecured
-  before_action :check_team_id_header, except: [:create, :update]
+  include Concerns::TeamSecured
+  before_action :check_team_id_header, except: [:create, :update, :index]
 
   def index
-    @team_requests = TeamRequest.where(team_id: request.headers['team-id'], status: 'sent')
+    @team_requests = TeamRequest.filter(params.slice(:id, :team_id)).where(status: 'sent')
                          .paginate(page: params[:page], per_page: 15)
 
     render json: @team_requests, include: {user: {}},

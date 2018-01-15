@@ -1,4 +1,4 @@
-module TeamSecured
+module Concerns::TeamSecured
   extend ActiveSupport::Concern
 
   def check_team_id_header

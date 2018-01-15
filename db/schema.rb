@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180113215556) do
+ActiveRecord::Schema.define(version: 20180115105533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 20180113215556) do
     t.integer "count_of_wows", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image"
     t.index ["challenge_id"], name: "index_styles_on_challenge_id"
     t.index ["user_id"], name: "index_styles_on_user_id"
   end

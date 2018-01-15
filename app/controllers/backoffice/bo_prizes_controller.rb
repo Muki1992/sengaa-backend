@@ -1,4 +1,4 @@
-class BoPrizesController < ApplicationController
+class Backoffice::BoPrizesController < ApplicationController
 
   def create
     @prize = Prize.new(prize_params)

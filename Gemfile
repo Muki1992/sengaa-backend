@@ -39,6 +39,8 @@ gem 'aws-sdk', '~> 2.3'
 # Pagination
 gem 'will_paginate'
 
+gem 'apipie-rails'
+
 gem 'rails_db'
 #whenever -cgem 'whenever', :require => false
 

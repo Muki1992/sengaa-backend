@@ -1,5 +1,5 @@
 class Backoffice::BoEventsController < ApplicationController
-  include Secured
+  include Concerns::Secured
 
   def index
     @events = Event.all

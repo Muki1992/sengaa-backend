@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  apipie
   get 'home/index'
 
   get "/pages/:page" => "pages#show"
@@ -24,8 +25,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api, defaults: {format: :json} do
-    resources :users,
-              :styles,
+    resources :styles,
               :followings,
               :wows,
               :comments,
@@ -33,14 +33,22 @@ Rails.application.routes.draw do
               :deals,
               :teams,
               :memberships,
-              :team_requests
+              :team_requests,
+              :awards
     namespace :challenges do
       resources :single_challenges, path: 'singles'
       resources :team_challenges, path: 'teams'
+      resources :styles
     end
 
-    resources :challenges do
+    resources :users do
       resources :styles
+      resources :memberships
+    end
+
+    resources :teams do
+      resources :memberships
+      resources :team_requests
     end
   end
 
