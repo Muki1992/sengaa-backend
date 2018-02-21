@@ -1,7 +1,12 @@
 class Api::StylesController < BaseApiController
 
-  # 1: List of all styles that have won an award
-  # 2: Randomizer for styles in active challenges
+  api :GET, '/challenges/:challenge_id/styles', 'Get random styles of a challenge'
+  api :GET, '/styles', 'Get styles from all challenge (Filtering optional)'
+  param :with_award, Integer, required: false
+  param :category_id, Integer, required: false
+  param :gender, Integer, required: false
+  param :state, Integer, required: false
+  param :page, Integer, required: false
   def index
     if params[:with_award] == '1'
       @styles = Style.includes(:challenge).joins(:award)
@@ -10,7 +15,7 @@ class Api::StylesController < BaseApiController
     else
       @styles = Style.includes(:challenge).filter(params.slice(:id, :challenge_id, :user_id))
                     .merge(Challenge.filter(params.slice(:id, :category_id, :gender, :state)).references(:challenge))
-                    .limit(2)
+                    .limit(9)
                     .order('RANDOM()')
     end
 

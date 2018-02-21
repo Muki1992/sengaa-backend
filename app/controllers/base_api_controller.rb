@@ -1,22 +1,21 @@
 class BaseApiController < ActionController::Base
- include Concerns::ApiSecured
+  protect_from_forgery with: :null_session
+  before_action :do_auth
 
-  def ping
-    render json: "All good. You only get this message if you're authenticated."
-  end
-
-  def track_action
-    @user_action = UserAction.new
-    @user_action.action_type = controller_name + ':' + action_name
-    case @user_action.action_type
-      when 'wows:create'
-        #@user_action.user_id = @wow.user_id
-        @user_action.wow_id = @wow.id
-      when 'followings:create'
-        #@user_action.user_id = @following.following_user_id
-        @user_action.following_id = @following.id
+  def do_auth
+    if current_participant
+    else
+      render_unauthorized('Access denied')
     end
-    @user_action.save
   end
 
+  def render_unauthorized(message)
+    errors = {error: message}
+    render json: errors, status: :unauthorized
+  end
+
+  def current_participant
+    @current_user = User.where(auth_token: request.headers['token']).first
+
+  end
 end

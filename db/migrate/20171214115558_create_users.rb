@@ -10,6 +10,10 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.integer :gender
       t.string :fist_name
       t.string :family_name
+      t.string :login_token
+      t.string :email
+      t.string :auth_token
+      t.datetime :token_generated
       t.date :birthdate
 
       t.timestamps

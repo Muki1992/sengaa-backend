@@ -4,7 +4,6 @@ class Challenge < ApplicationRecord
 
   scope :single_challenges, -> {where(type: 'SingleChallenge')}
 
-
   belongs_to :category
   has_many :awards
   has_many :styles

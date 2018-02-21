@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180115105533) do
+ActiveRecord::Schema.define(version: 20180215144111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,12 +114,24 @@ ActiveRecord::Schema.define(version: 20180115105533) do
   create_table "partners", force: :cascade do |t|
     t.string "name"
     t.string "url"
+    t.string "logo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
+  end
+
+  create_table "points", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "rank"
+    t.integer "score", default: 0
+    t.integer "style_score", default: 0
+    t.integer "wow_score", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_points_on_user_id"
   end
 
   create_table "styles", force: :cascade do |t|
@@ -193,6 +205,10 @@ ActiveRecord::Schema.define(version: 20180115105533) do
     t.integer "gender"
     t.string "fist_name"
     t.string "family_name"
+    t.string "login_token"
+    t.string "email"
+    t.string "auth_token"
+    t.datetime "token_generated"
     t.date "birthdate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -216,6 +232,7 @@ ActiveRecord::Schema.define(version: 20180115105533) do
   add_foreign_key "memberships", "teams"
   add_foreign_key "memberships", "users"
   add_foreign_key "participation_rewards", "partners"
+  add_foreign_key "points", "users"
   add_foreign_key "styles", "challenges"
   add_foreign_key "styles", "users"
   add_foreign_key "team_challenge_stages", "challenges"

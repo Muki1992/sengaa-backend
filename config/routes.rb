@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  root 'static#home'
 
   apipie
   get 'home/index'
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
   # Auth0
   get "/auth/oauth2/callback" => "auth0#callback"
   get "/auth/failure" => "auth0#failure"
+
 
   # BoController
   resources :bo_events,
@@ -25,6 +27,11 @@ Rails.application.routes.draw do
   end
 
   namespace :api, defaults: {format: :json} do
+
+    get 'request/token' => 'authentication#send_login_token'
+    get 'login' => 'authentication#login'
+    post 'register' => 'authentication#register'
+
     resources :styles,
               :followings,
               :wows,
@@ -34,7 +41,8 @@ Rails.application.routes.draw do
               :teams,
               :memberships,
               :team_requests,
-              :awards
+              :awards,
+              :points
     namespace :challenges do
       resources :single_challenges, path: 'singles'
       resources :team_challenges, path: 'teams'
@@ -44,6 +52,7 @@ Rails.application.routes.draw do
     resources :users do
       resources :styles
       resources :memberships
+      resources :awards
     end
 
     resources :teams do

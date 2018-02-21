@@ -5,6 +5,8 @@ class Award < ApplicationRecord
   belongs_to :challenge, optional: true
   belongs_to :style, optional: true
 
-  scope :user_id, -> (user_id) {where user_id: user_id}
 
+  delegate :user, :to => :style, :allow_nil => true
+
+  scope :user_id, ->(user_id) {includes(:style).where(styles: {user_id: user_id})}
 end
